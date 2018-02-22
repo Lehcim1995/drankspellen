@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cards</title>
+
+    <link rel="stylesheet" href="../node_modules/deck-of-cards/example/example.css">
+</head>
+<body>
+<script src="../node_modules/deck-of-cards/dist/deck.min.js"></script>
+
+<div id="container"></div>
+
+<p>Aantal spelers: </p><input type="text" name="players" value="2">
+
+<button onclick="draaiKaart()"> kaart </button>
+<button onclick="maakPiramide()"> maak piramide </button>
+<button onclick="draaiKaart()"> maak bus </button>
+
+
+<script>
+    var $container = document.getElementById('container');
+
+    // create Deck
+    var deck = Deck();
+
+    // add to DOM
+    deck.mount($container);
+
+    var cardWidth = 75;
+    var cardMargin = 5;
+    var cardHeight = 110;
+
+    var offsetX = -300;
+    var offsetY = -75;
+
+    var towerRows = 5;
+
+    var towerCardsPile = [];
+
+    function maakCircle() {
+
+    }
+
+    function maakPiramide() {
+        deck.unmount();
+        deck = Deck();
+        deck.mount($container);
+        deck.shuffle();
+
+        towerCardsPile = [];
+
+        setTimeout(function () {
+
+            var towerCards = deck.cards.splice(0, 16);
+
+            for (var towerRow = 0; towerRow < towerRows; towerRow++) {
+                var rowCards = towerCards.splice(0, towerRow + 1);
+                towerCardsPile = towerCardsPile.concat(rowCards);
+                console.log(rowCards);
+
+                rowCards.forEach(function (card, i) {
+                    card.animateTo({
+                        delay: 0,
+                        duration: 500,
+                        ease: 'quartOut',
+                        y: offsetY + (towerRow * (cardHeight + cardMargin)),
+                        x: offsetX + (i * (cardWidth + cardMargin)) - (cardWidth / 2 * towerRow)
+                    });
+                });
+            }
+
+            towerCardsPile.reverse();
+        }, 500);
+    }
+
+    function draaiKaart() {
+
+        var card = towerCardsPile.splice(0,1);
+
+        card[0].setSide('front');
+
+        // card[0].enableFlipping();
+        // card[0].setSide('front');
+    }
+
+</script>
+</body>
+</html>
