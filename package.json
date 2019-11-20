@@ -1,0 +1,23 @@
+{
+  "name": "drankspellen",
+  "version": "1.0.0",
+  "description": "in cmd voer npm install deck-of-cards\r https://github.com/pakastin/deck-of-cards",
+  "main": "index.js",
+  "dependencies": {
+    "deck-of-cards": "^0.1.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lehcim1995/drankspellen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lehcim1995/drankspellen/issues"
+  },
+  "homepage": "https://github.com/Lehcim1995/drankspellen#readme"
+}
