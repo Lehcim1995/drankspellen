@@ -15,33 +15,61 @@
 <button onclick="draaiKaart()"> kaart </button>
 <button onclick="maakPiramide()"> maak piramide </button>
 <button onclick="draaiKaart()"> maak bus </button>
+<button onclick="maakCircle()"> maak circle </button>
 
 
 <script>
     var $container = document.getElementById('container');
 
     // create Deck
-    var deck = Deck();
+    let deck = Deck();
 
     // add to DOM
     deck.mount($container);
 
-    var cardWidth = 75;
-    var cardMargin = 5;
-    var cardHeight = 110;
+    let cardWidth = 75;
+    let cardMargin = 5;
+    let cardHeight = 110;
 
-    var offsetX = -300;
-    var offsetY = -75;
+    let offsetX = -300;
+    let offsetY = -75;
+    let circleLenght = 300;
 
-    var towerRows = 5;
+    let deg2rad = 3.141597/180;
 
-    var towerCardsPile = [];
+    let towerRows = 5;
+
+    let towerCardsPile = [];
+
+    let mode = "";
 
     function maakCircle() {
+        mode = "Circle";
+        let step = 360 / 52;
 
+        deck.unmount();
+        deck = Deck();
+        deck.mount($container);
+        deck.shuffle();
+        towerCardsPile = [];
+
+        setTimeout(function () {
+            deck.cards.forEach(function(card, i ) {
+                towerCardsPile.push(card);
+                card.animateTo({
+                            delay: 0,
+                            duration: 500,
+                            ease: 'quartOut',
+                            y: offsetY + (Math.cos((i * step ) * deg2rad ) * circleLenght ),
+                            x: offsetX + (Math.sin((i * step ) * deg2rad ) * circleLenght ),
+                            rot: -i * step
+                        });
+            })
+        }, 500);
     }
 
     function maakPiramide() {
+        mode = "Piramide";
         deck.unmount();
         deck = Deck();
         deck.mount($container);
@@ -75,9 +103,49 @@
 
     function draaiKaart() {
 
-        var card = towerCardsPile.splice(0,1);
+        if (mode == "")
+        {
 
-        card[0].setSide('front');
+        }
+        else if (mode == "Circle")
+        {
+            let r = Math.floor(Math.random() * 52);
+            
+            let i = r;
+            let step = 360 / 52;
+
+            let card = towerCardsPile[r];
+
+            console.log("Expected:");
+            console.log(" y = " + (offsetY + (Math.cos((i * step ) * deg2rad ) * circleLenght )) );
+            console.log(" x = " + (offsetX + (Math.sin((i * step ) * deg2rad ) * circleLenght )) );
+            console.log(" rot = " + (-i * step) );
+
+            console.log("Got:");
+            console.log(card.y);
+            console.log(card.x);
+            console.log(card.z);
+            console.log(card.rot);
+
+            card.animateTo({
+                            delay: 0,
+                            duration: 500,
+                            ease: 'quartOut',
+                            y: offsetY + (Math.cos((i * step ) * deg2rad ) * (circleLenght + 200) ),
+                            x: offsetX + (Math.sin((i * step ) * deg2rad ) * (circleLenght + 200) ),
+                            rot: -i * step
+                        });
+
+            card.setSide('front');
+        }
+        else if (mode == "Piramide")
+        {
+            let card = towerCardsPile.splice(0,1);
+
+            card[0].setSide('front');
+        }
+
+        
 
         // card[0].enableFlipping();
         // card[0].setSide('front');
