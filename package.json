@@ -4,11 +4,11 @@
   "description": "in cmd voer npm install deck-of-cards\r https://github.com/pakastin/deck-of-cards",
   "main": "index.js",
   "dependencies": {
-    "deck-of-cards": "^0.1.8"
+    "deck-of-cards": "^0.1.8",
+    "jquery": "^3.4.1"
   },
   "devDependencies": {},
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lehcim1995/drankspellen.git"
