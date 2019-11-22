@@ -1,0 +1,14 @@
+#controls {
+    background-color: gray;
+    border-radius: 5px;
+
+    width: 7vw;
+    height: 7vw;
+
+    margin: 50px;
+    padding: 5px;
+}
+
+button {
+    /* Add css */
+}
