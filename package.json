@@ -8,7 +8,9 @@
     "jquery": "^3.4.1"
   },
   "devDependencies": {},
-  "scripts": {},
+  "scripts": {
+    "build" : "browserify  js/bussen.js -o public/bundle.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lehcim1995/drankspellen.git"
