@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build" : "browserify  js/bussen.js -o public/bundle.js"
+    "build" : "browserify  js/main.js js/bussen.js -o public/bundle.js"
   },
   "repository": {
     "type": "git",

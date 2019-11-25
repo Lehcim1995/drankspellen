@@ -1,16 +1,13 @@
 'use strict'
 
-let doc = require('deck-of-cards');
-let jquery = require('jquery');
-
-
-var $ = jquery.$;
-var Deck = doc.Deck;
+var $ = require("jquery");
 
 var $container = document.getElementById('container');
+// var $container = $('#container');
+console.log($container);
 
 // create Deck
-//let deck = Deck();
+let deck;
 
 // add to DOM
 //deck.mount($container);
@@ -35,14 +32,25 @@ let $buttonOpnieuw = $("#opnieuw");
 let $buttonCorrect = $("#goed");
 let $buttonFout = $("#fout");
 
-reset();
+$buttonVolgendeKaart.click(draaiKaart);
+$buttonOpnieuw.click(resetGame);
+$buttonCorrect.click(goed);
+$buttonFout.click(fout);
 
-var reset = function()
+resetGame();
+
+function resetGame()
 {
-    deck.unmount();
-    deck = Deck();
-    deck.mount($container);
-    deck.shuffle();
+    if (deck != undefined || deck != null)
+    {
+        deck.unmount();
+    
+    }
+
+        deck = Deck();
+        deck.mount($container);
+        deck.shuffle();
+    
 
     deck.x = 50;
     deck.y = 50;
@@ -70,7 +78,7 @@ var reset = function()
     }, 500);
 }
 
-var resetVars = function()
+function resetVars()
 {
     ronde = 1;
     huidigeRij = [];
@@ -78,7 +86,7 @@ var resetVars = function()
 
 }
 
-var goed = function()
+function goed()
 {
     $buttonVolgendeKaart.show();
     $buttonCorrect.hide();
@@ -91,7 +99,7 @@ var goed = function()
     }
 }
 
-var fout = function()
+function fout()
 {
     $buttonVolgendeKaart.show();
     $buttonCorrect.hide();
@@ -101,7 +109,7 @@ var fout = function()
     ronde += 1;
 }
 
-var draaiKaart = function()
+function draaiKaart()
 {
     $buttonVolgendeKaart.hide();
     $buttonCorrect.show();
